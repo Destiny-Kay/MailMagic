@@ -1,0 +1,220 @@
+{
+	"tldrawFileFormatVersion": 1,
+	"schema": {
+		"schemaVersion": 2,
+		"sequences": {
+			"com.tldraw.store": 4,
+			"com.tldraw.asset": 1,
+			"com.tldraw.camera": 1,
+			"com.tldraw.document": 2,
+			"com.tldraw.instance": 25,
+			"com.tldraw.instance_page_state": 5,
+			"com.tldraw.page": 1,
+			"com.tldraw.instance_presence": 5,
+			"com.tldraw.pointer": 1,
+			"com.tldraw.shape": 4,
+			"com.tldraw.asset.bookmark": 2,
+			"com.tldraw.asset.image": 5,
+			"com.tldraw.asset.video": 5,
+			"com.tldraw.shape.group": 0,
+			"com.tldraw.shape.text": 2,
+			"com.tldraw.shape.bookmark": 2,
+			"com.tldraw.shape.draw": 2,
+			"com.tldraw.shape.geo": 9,
+			"com.tldraw.shape.note": 7,
+			"com.tldraw.shape.line": 5,
+			"com.tldraw.shape.frame": 0,
+			"com.tldraw.shape.arrow": 5,
+			"com.tldraw.shape.highlight": 1,
+			"com.tldraw.shape.embed": 4,
+			"com.tldraw.shape.image": 4,
+			"com.tldraw.shape.video": 2,
+			"com.tldraw.binding.arrow": 0
+		}
+	},
+	"records": [
+		{
+			"gridSize": 10,
+			"name": "",
+			"meta": {},
+			"id": "document:document",
+			"typeName": "document"
+		},
+		{
+			"id": "pointer:pointer",
+			"typeName": "pointer",
+			"x": 1269.4006490479233,
+			"y": 593.6313361478196,
+			"lastActivityTimestamp": 1723729603170,
+			"meta": {}
+		},
+		{
+			"meta": {},
+			"id": "page:page",
+			"name": "Page 1",
+			"index": "a1",
+			"typeName": "page"
+		},
+		{
+			"followingUserId": null,
+			"opacityForNextShape": 1,
+			"stylesForNextShape": {
+				"tldraw:geo": "rectangle",
+				"tldraw:size": "m"
+			},
+			"brush": null,
+			"scribbles": [],
+			"cursor": {
+				"type": "default",
+				"rotation": 0
+			},
+			"isFocusMode": false,
+			"exportBackground": true,
+			"isDebugMode": false,
+			"isToolLocked": false,
+			"screenBounds": {
+				"x": 0,
+				"y": 0,
+				"w": 1284.72216796875,
+				"h": 606.9443969726562
+			},
+			"insets": [
+				false,
+				false,
+				true,
+				false
+			],
+			"zoomBrush": null,
+			"isGridMode": false,
+			"isPenMode": false,
+			"chatMessage": "",
+			"isChatting": false,
+			"highlightedUserIds": [],
+			"isFocused": true,
+			"devicePixelRatio": 1.440000057220459,
+			"isCoarsePointer": false,
+			"isHoveringCanvas": true,
+			"openMenus": [],
+			"isChangingStyle": false,
+			"isReadonly": false,
+			"meta": {},
+			"duplicateProps": null,
+			"id": "instance:instance",
+			"currentPageId": "page:page",
+			"typeName": "instance"
+		},
+		{
+			"editingShapeId": "shape:l_lSXngy8zyecr6tRIImy",
+			"croppingShapeId": null,
+			"selectedShapeIds": [
+				"shape:l_lSXngy8zyecr6tRIImy"
+			],
+			"hoveredShapeId": "shape:l_lSXngy8zyecr6tRIImy",
+			"erasingShapeIds": [],
+			"hintingShapeIds": [],
+			"focusedGroupId": null,
+			"meta": {},
+			"id": "instance_page_state:page:page",
+			"pageId": "page:page",
+			"typeName": "instance_page_state"
+		},
+		{
+			"x": -634.5255826787893,
+			"y": -180.9869636273043,
+			"z": 1.177933640580826,
+			"meta": {},
+			"id": "camera:page:page",
+			"typeName": "camera"
+		},
+		{
+			"x": 136.03515625,
+			"y": 103.42881774902344,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:kWEkPDfUWgvAWH7LYHB5V",
+			"type": "geo",
+			"props": {
+				"w": 261.99131774902344,
+				"h": 139.62672424316406,
+				"geo": "rectangle",
+				"color": "black",
+				"labelColor": "black",
+				"fill": "none",
+				"dash": "draw",
+				"size": "m",
+				"font": "draw",
+				"text": "Landing page: Intro, benefits, how to use.\nAbout Page: Empowering people to take charge of their emailing process ease.\nContact: My personal contacts>\n\nLogin and signup buttons",
+				"align": "middle",
+				"verticalAlign": "middle",
+				"growY": 278.4518280029297,
+				"url": "",
+				"scale": 1
+			},
+			"parentId": "page:page",
+			"index": "a1",
+			"typeName": "shape"
+		},
+		{
+			"x": 440.896240234375,
+			"y": 83.98437524835268,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:b4Wgymjp3v-MJWrAVLwRs",
+			"type": "geo",
+			"props": {
+				"w": 452.9960632324219,
+				"h": 320.876708984375,
+				"geo": "rectangle",
+				"color": "black",
+				"labelColor": "black",
+				"fill": "none",
+				"dash": "draw",
+				"size": "m",
+				"font": "draw",
+				"text": "THE APPLICATION\n\n\nDashboard:: Shows email sent receipts.\nSettings: Setup your mail client details:: password, email address, email provider...\nSend mail func:::\nContacts::: Be able to group contacts depending on some factors.",
+				"align": "middle",
+				"verticalAlign": "middle",
+				"growY": 37.805145263671875,
+				"url": "",
+				"scale": 1
+			},
+			"parentId": "page:page",
+			"index": "a2BCE",
+			"typeName": "shape"
+		},
+		{
+			"x": 964.507361232131,
+			"y": 87.45659736792243,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:l_lSXngy8zyecr6tRIImy",
+			"type": "geo",
+			"props": {
+				"w": 379.99261474609375,
+				"h": 436.8489456176758,
+				"geo": "rectangle",
+				"color": "black",
+				"labelColor": "black",
+				"fill": "none",
+				"dash": "draw",
+				"size": "m",
+				"font": "draw",
+				"text": "THE BACKEND\n_______________\nImplement AUTH.. USE cookies\nImplement functionality to send emails using Rabbitmq queueing protocol.\n\n\nAPIS\n____________\nlogin\nlogout\nsignup\nsend-mail\ncreate contact group\ncreate contact\nAdd user in contact group",
+				"align": "middle",
+				"verticalAlign": "middle",
+				"growY": 100.02300262451172,
+				"url": "",
+				"scale": 1
+			},
+			"parentId": "page:page",
+			"index": "a34iN",
+			"typeName": "shape"
+		}
+	]
+}
