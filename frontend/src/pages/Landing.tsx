@@ -4,6 +4,7 @@ import "/landing-image.png"
 import { IoIosTimer } from "react-icons/io";
 import { MdOutlineSpeed } from "react-icons/md";
 import { RiContactsLine } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 export default function Landing() {
     return(
@@ -12,7 +13,7 @@ export default function Landing() {
                 <Flex className="mt-20 items-center justify-center h-full flex-col px-4">
                     <p className="text-4xl md:text-6xl text-black font-extrabold text-center max-w-[900px]">Get your E-Mails to the right inbox <span className="text-purple-700">{"\u{1F4E8}"} Fast.</span></p>
                     <p className="max-w-[800px] md:text-lg font-bold mt-12">Don't waste time even thinking of sending those mass emails to your contacts. Leave the workload to us, we help you send those emails without breaking a sweat. Manage your contacts, send mails and get send receipts faster with us.</p>
-                    <Button variant="outline" className="text-sm lg:text-xl px-20 py-6 mt-8 cursor-pointer">Get started now</Button>
+                    <Link to={"/auth/signup"}><Button variant="outline" className="text-sm lg:text-xl px-20 py-6 mt-8 cursor-pointer">Get started now</Button></Link>
                 </Flex>
                 <Flex className="items-center justify-center w-full mt-16 overflow-hidden px-4">
                     <div className=" max-w-full w-[900px] max-h-[400px]">
