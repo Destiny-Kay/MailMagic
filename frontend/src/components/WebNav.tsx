@@ -28,8 +28,8 @@ export default function WebNav() {
                             <NavLink to={'/'} className={({isActive}) => `px-4 py-1 font-bold ${isActive && "bg-purple-100 text-purple-700 rounded-lg"}`}>Home</NavLink>
                             <NavLink to={'/about'} className={({isActive}) => `px-4 py-1 font-bold ${isActive && "bg-purple-100 text-purple-700 rounded-lg"}`}>About</NavLink>
                             <Flex className="flex-col mt-20 gap-4 w-3/4">
-                                <Link to={"/auth/signup"}><Button className="cursor-pointer">Get started</Button></Link>
-                                <Link to={'/auth/login'}><Button variant="outline" className="cursor-pointer">Login</Button></Link>
+                                <Link to={"/auth/signup"}><Button className="cursor-pointer w-full">Get started</Button></Link>
+                                <Link to={'/auth/login'}><Button variant="outline" className="cursor-pointer w-full">Login</Button></Link>
                             </Flex>
                         </Flex>
                     </div>
