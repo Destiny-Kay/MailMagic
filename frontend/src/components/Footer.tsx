@@ -2,6 +2,7 @@ import { Flex } from "@radix-ui/themes";
 import { TbBrandFacebook } from "react-icons/tb";
 import { FiTwitter } from "react-icons/fi";
 import { LuLinkedin } from "react-icons/lu";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
     return(
@@ -12,7 +13,7 @@ export default function Footer() {
             <div>
                 <p className="font-bold text-xl mb-1">GET IN TOUCH</p>
                 <Flex className="gap-4 text-2xl">
-                    <TbBrandFacebook  className="cursor-pointer"/>
+                    <Link to={'/'}><TbBrandFacebook  className="cursor-pointer"/></Link>
                     <FiTwitter className="cursor-pointer"/>
                     <LuLinkedin className="cursor-pointer"/>
                 </Flex>
