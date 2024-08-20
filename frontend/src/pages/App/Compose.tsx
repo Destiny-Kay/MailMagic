@@ -11,8 +11,8 @@ type emailContent = {
 }
 
 export default function Compose() {
-    // const [composeStage, setComposeStage] = useState<composeStage>("compose")
-    const [composeStage, setComposeStage] = useState<composeStage>("contactSelection")
+    const [composeStage, setComposeStage] = useState<composeStage>("compose")
+    // const [composeStage, setComposeStage] = useState<composeStage>("contactSelection")
     const [emailContent, setEmailContent] = useState<emailContent>({
         salutation: '',
         subject: '',
@@ -44,12 +44,14 @@ export default function Compose() {
                                 name="salutation"
                                 onChange={(event) => handleEmailFormChange(event)}
                                 placeholder="Dear"
+                                defaultValue={emailContent.salutation}
                                 className="p-2 h-fit tex border-[1px] border-black/20 rounded-sm focus:outline-purple-400"></input>
                         </div>
                         <div className="flex flex-col gap-2">
                             <label>Email Subject</label>
                             <input
                                 name="subject"
+                                defaultValue={emailContent.subject}
                                 onChange={(event) => handleEmailFormChange(event)}
                                 placeholder="LAUNCH OF OUR NEW PRODUCT"
                                 className="p-2 h-fit tex border-[1px] border-black/20 rounded-sm focus:outline-purple-400"></input>
@@ -57,6 +59,7 @@ export default function Compose() {
                         <label>Email body</label>
                         <TextArea
                             name="body"
+                            defaultValue={emailContent.body}
                             onChange={(event) => handleEmailFormChange(event)}
                             placeholder="Enter email body."
                             className="min-h-[100px] h-fit"/>
@@ -85,10 +88,14 @@ export default function Compose() {
                     composeStage === "preview" &&
                     <>
                         <p className="font-bold text-xl mb-8">Preview your email message</p>
-                        <Container>
-                            <p>This is a container element</p>
+                        <Container className="border-[1px] p-2 rounded-lg">
+                            <p><span className="font-bold">Email subject: </span> {emailContent.subject}</p>
+                            <div className="border-[1px] p-2 rounded-lg mt-6">
+                                <p>{emailContent.salutation} John,</p>
+                                <p>{emailContent.body}</p>
+                            </div>
                         </Container>
-                        <Flex className="w-full justify-center gap-2">
+                        <Flex className="w-full mt-4 justify-center gap-2">
                             <Button variant="outline" className="px-4 cursor-pointer" onClick={() => setComposeStage("contactSelection")}>Back</Button>
                             <Button className="cursor-pointer" onClick={() => setComposeStage("preview")}>Send emails</Button>
                         </Flex>

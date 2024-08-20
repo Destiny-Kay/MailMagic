@@ -4,6 +4,7 @@ import { useState } from "react"
 export default function ContactSelect() {
     const [allContactsSelected, setAllContactsSelected] = useState<boolean>(false)
     // TODO: Change everything here to make api call to the backend
+    // Move the selected contact state to redux store to ensure 
     console.log(allContactsSelected)
     return(
         <Container className="m-auto overflow-x-scroll">
