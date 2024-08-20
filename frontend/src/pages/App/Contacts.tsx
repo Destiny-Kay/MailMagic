@@ -1,6 +1,27 @@
-import { Avatar, Container, Table, Tabs } from "@radix-ui/themes";
+import { Avatar, Container, IconButton, Table, Tabs } from "@radix-ui/themes";
 import AppLayout from "../../layouts/AppLayout";
+import * as Dialog from "@radix-ui/react-dialog"
+import { FaPlus } from "react-icons/fa";
 
+
+function AddContactButton() {
+    return(
+        <Dialog.Root>
+            <Dialog.Trigger asChild>
+                <IconButton className="rounded-full mt-4 cursor-pointer"><FaPlus /></IconButton>
+            </Dialog.Trigger>
+
+            <Dialog.Portal>
+                <Dialog.Overlay />
+                <Dialog.Content>
+                    <Dialog.Title>Add a new contact</Dialog.Title>
+                    <Dialog.Description>This is a dialog</Dialog.Description>
+                    <p>Enter the email address</p>
+                </Dialog.Content>
+            </Dialog.Portal>
+        </Dialog.Root>
+    )
+}
 export default function Contacts() {
     return(
         <AppLayout>
@@ -12,6 +33,7 @@ export default function Contacts() {
                 </Tabs.List>
                 
                 <Tabs.Content value="contacts">
+                    <AddContactButton />
                     <Table.Root>
                         <Table.Header>
                             <Table.ColumnHeaderCell></Table.ColumnHeaderCell>
