@@ -1,4 +1,4 @@
-import { Avatar, Button, Container, IconButton, Table, Tabs, Flex, TextArea } from "@radix-ui/themes";
+import { Avatar, Container, IconButton, Table, Tabs, Flex, TextArea } from "@radix-ui/themes";
 import AppLayout from "../../layouts/AppLayout";
 import * as Dialog from "@radix-ui/react-dialog"
 import { FaPlus } from "react-icons/fa";
@@ -131,6 +131,7 @@ export default function Contacts() {
                             <Table.ColumnHeaderCell></Table.ColumnHeaderCell>
                             <Table.ColumnHeaderCell>Name</Table.ColumnHeaderCell>
                             <Table.ColumnHeaderCell>Contacts</Table.ColumnHeaderCell>
+                            <Table.ColumnHeaderCell></Table.ColumnHeaderCell>
                         </Table.Header>
 
                         <Table.Body>
@@ -138,6 +139,8 @@ export default function Contacts() {
                                 <Table.RowHeaderCell><Avatar fallback="A" className="rounded-full"/></Table.RowHeaderCell>
                                 <Table.Cell>School members</Table.Cell>
                                 <Table.Cell>23</Table.Cell>
+                                {/* Add a popup that lists all contacts */}
+                                <Table.Cell>+</Table.Cell>
                             </Table.Row>
                         </Table.Body>
                     </Table.Root>
