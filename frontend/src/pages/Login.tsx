@@ -1,8 +1,21 @@
 import { Button, Flex } from "@radix-ui/themes";
 import AuthLayout from "../layouts/AuthLayout";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
+type LoginForm = {
+    email: string,
+    password: string
+}
 export default function Login() {
+    const [loginForm, setLoginForm] =  useState<LoginForm>({
+        email: '',
+        password: ''
+    })
+    const handleLoginFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = event.target
+        setLoginForm({...loginForm, [name]: value})
+    }
     return(
         <AuthLayout>
             <Flex className="justify-center items-center min-h-[50vh]">
@@ -11,11 +24,18 @@ export default function Login() {
                     <p className="mb-10">Don't have an account? <Link to={'/auth/signup'} className="text-purple-700 underline">Create one</Link></p>
                     <div>
                         <label className="block">Email</label>
-                        <input className="w-full border-2 border-purple-400 h-[40px] focus:outline-none px-2 rounded-md" placeholder="johndoe@email.com"></input>
+                        <input
+                            name="email"
+                            onChange={(event) => handleLoginFormChange(event)}
+                            className="w-full border-2 border-purple-400 h-[40px] focus:outline-none px-2 rounded-md"
+                            placeholder="johndoe@email.com"></input>
                     </div>
                     <div>
                         <label className="block">Password</label>
-                        <input className="w-full border-2 border-purple-400 h-[40px] focus:outline-none px-2 rounded-md"></input>
+                        <input
+                            name="password"
+                            onChange={(event) => handleLoginFormChange(event)}
+                            className="w-full border-2 border-purple-400 h-[40px] focus:outline-none px-2 rounded-md"></input>
                     </div>
                     <Button className="w-full mt-8 py-5 cursor-pointer">Login</Button>
                 </form>

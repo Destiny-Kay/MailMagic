@@ -9,7 +9,7 @@ import { SlLogout } from "react-icons/sl";
 export default function AppSidebar() {
     const [sidebarOpen, setSidebarOPen] = useState(false)
     return (
-        <div className="hidden md:block fixed left-0 pt-8 bg-white h-full border-r-2 w-fit mt-10  ">
+        <div className="hidden md:block fixed left-0 top-0 pt-8 bg-white h-full border-r-2 w-fit mt-10  ">
             {/* <p className="font-bold text-xl px-4">Mail <span>Magic</span></p> */}
             <Flex className="w-full justify-end">
                 <IconButton className="rounded-full text cursor-pointer">
