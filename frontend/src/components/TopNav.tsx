@@ -3,7 +3,7 @@ import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { LuLayoutDashboard, LuPencilLine, LuSettings } from "react-icons/lu";
 import { RiContactsLine } from "react-icons/ri";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
 import { SlLogout } from "react-icons/sl";
 
@@ -11,7 +11,7 @@ export default function TopNav() {
     const [dropdownNavOpen, setDropDownNavOpen] = useState(false)
     return(
         <div className="z-40 fixed top-0 bg-white w-full flex justify-between items-center px-4 py-2 border-b-2">
-            <p className="font-bold">Mail <span className="text-purple-700">Magic</span></p>
+            <Link to={"/"} className="font-bold">Mail <span className="text-purple-700">Magic</span></Link>
             {/* MobileNav */}
             {/* <div className="md:hidden"> */}
                 {
