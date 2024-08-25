@@ -3,6 +3,7 @@ import AuthLayout from "../layouts/AuthLayout";
 import { Flex, Button, Checkbox } from "@radix-ui/themes";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import "/signup-image.jpg"
 
 type signupForm = {
     firstName: string,
@@ -89,7 +90,9 @@ export default function Signup() {
                             <Button className="w-full mt-6 py-6 cursor-pointer">Create account</Button>
                         </div>
                     </form>
-                    <div className="hidden lg:block">IMage here</div>
+                    <div className="hidden lg:block">
+                        <img className="" src="signup-image.jpg"></img>
+                    </div>
                 </div>
             </div>
         </AuthLayout>
