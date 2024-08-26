@@ -2,6 +2,7 @@ import { Button, Flex, Container, TextArea } from "@radix-ui/themes";
 import AppLayout from "../../layouts/AppLayout";
 import { useEffect, useState } from "react";
 import ContactSelect from "../../components/ContactSelect";
+import * as Dialog from "@radix-ui/react-dialog"
 
 type composeStage = "compose" | "contactSelection" | "preview"
 type emailContent = {
@@ -10,9 +11,28 @@ type emailContent = {
     body: string
 }
 
+function SendEmailPopup() {
+    return(
+        <Dialog.Root>
+            <Dialog.Trigger>
+                <Button className="cursor-pointer">Send Emails</Button>
+            </Dialog.Trigger>
+
+            <Dialog.Portal>
+                <Dialog.Overlay className="fixed inset-0 bg-black opacity-50"/>
+                <Dialog.Content className="w-5/6 md:w-[400px] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-4">
+                    <Dialog.Title>Confirm sending emails to selected contacts</Dialog.Title>
+                    <Flex className="gap-2 mt-4 items-center justify-center">
+                        <Dialog.Close><button className="border-2 border-purple-500 px-4 py-1 rounded-md text-purple-600 font-bold cursor-pointer">Cancel</button></Dialog.Close>
+                        <Dialog.Close><button className="border-none px-4 py-1 rounded-md text-white bg-purple-600 font-bold cursor-pointer">Confirm</button></Dialog.Close>
+                    </Flex>
+                </Dialog.Content>
+            </Dialog.Portal>
+        </Dialog.Root>
+    )
+}
 export default function Compose() {
     const [composeStage, setComposeStage] = useState<composeStage>("compose")
-    // const [composeStage, setComposeStage] = useState<composeStage>("contactSelection")
     const [emailContent, setEmailContent] = useState<emailContent>({
         salutation: '',
         subject: '',
@@ -30,7 +50,7 @@ export default function Compose() {
         else {
             setEmailContentValid(false)
         }
-    })
+    }, [emailContent.body.length, emailContent.salutation.length, emailContent.subject.length])
     return(
         <AppLayout>
             <Container className="md:mt-32 md:w-2/3 mt-20 mx-6 md:m-auto">
@@ -97,7 +117,8 @@ export default function Compose() {
                         </Container>
                         <Flex className="w-full mt-4 justify-center gap-2">
                             <Button variant="outline" className="px-4 cursor-pointer" onClick={() => setComposeStage("contactSelection")}>Back</Button>
-                            <Button className="cursor-pointer" onClick={() => setComposeStage("preview")}>Send emails</Button>
+                            {/* <Button className="cursor-pointer" onClick={() => setComposeStage("preview")}>Send emails</Button> */}
+                            <SendEmailPopup />
                         </Flex>
                     </>
                 }

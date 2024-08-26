@@ -59,6 +59,12 @@ class ContactGroup(Timestamp):
     contacts = models.ManyToManyField(Contact, blank=True)
     description = models.CharField(max_length=255)
 
+class EmailAccount(Timestamp):
+    '''Email accounts for a specific user'''
+    name = models.CharField(max_length=255)
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    email_address = models.EmailField()
+    password = models.CharField(max_length=500)
 
 class EmailContent(models.Model):
     '''EMail content model'''

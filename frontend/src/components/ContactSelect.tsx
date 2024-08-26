@@ -1,11 +1,37 @@
 import { Checkbox, Container, Table, Tabs } from "@radix-ui/themes"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { api } from "../lib/requestHandler"
+
+type contact = {
+    name: string,
+    email: string,
+    id: number
+}
+type group = {
+    id: number,
+    name: string,
+    contacts: string[],
+    description: string
+}
 
 export default function ContactSelect() {
-    const [allContactsSelected, setAllContactsSelected] = useState<boolean>(false)
-    // TODO: Change everything here to make api call to the backend
-    // Move the selected contact state to redux store to ensure 
-    console.log(allContactsSelected)
+    const [selectedContacts, setSelectedContacts] = useState<contact[] | group[]>([])
+    const [contacts, setContacts] = useState<contact[]>([])
+    const [groups, setGroups] = useState<group[]>([])
+    useEffect(() => {
+        api.get('/app/contacts')
+        .then((response) => {
+            if (response.status === 200) {
+                setContacts(response.data.data)
+            }
+        })
+        api.get('/app/contactgroups')
+        .then((response) => {
+            if (response.status === 200) {
+                setGroups(response.data.data)
+            }
+        })
+    }, [])
     return(
         <Container className="m-auto overflow-x-scroll">
             <Tabs.Root defaultValue="contacts">
@@ -18,23 +44,21 @@ export default function ContactSelect() {
                     <Table.Root>
                         <Table.Header>
                             <Table.Row>
-                                <Table.ColumnHeaderCell className="flex gap-2"><Checkbox className="cursor-pointer" value={"all"} onCheckedChange={() => setAllContactsSelected(true)}/><p>All</p></Table.ColumnHeaderCell>
+                                <Table.ColumnHeaderCell className="flex gap-2">Select</Table.ColumnHeaderCell>
                                 <Table.ColumnHeaderCell>Name</Table.ColumnHeaderCell>
                                 <Table.ColumnHeaderCell>email</Table.ColumnHeaderCell>
                             </Table.Row>
                         </Table.Header>
                         <Table.Body>
-                            {/* Add contacts here in rows */}
-                            <Table.Row>
-                                <Table.RowHeaderCell><Checkbox className="cursor-pointer"/></Table.RowHeaderCell>
-                                <Table.Cell>John Doe</Table.Cell>
-                                <Table.Cell>johndoe@email.com</Table.Cell>
-                            </Table.Row>
-                            <Table.Row>
-                                <Table.RowHeaderCell><Checkbox className="cursor-pointer"/></Table.RowHeaderCell>
-                                <Table.Cell>John Doe</Table.Cell>
-                                <Table.Cell>johndoe@email.com</Table.Cell>
-                            </Table.Row>
+                            {
+                                contacts.map((contact) => (
+                                    <Table.Row key={contact.id}>
+                                        <Table.RowHeaderCell><Checkbox className="cursor-pointer"/></Table.RowHeaderCell>
+                                        <Table.Cell>{contact.name}</Table.Cell>
+                                        <Table.Cell>{contact.email}</Table.Cell>
+                                    </Table.Row>
+                                ))
+                            }
                         </Table.Body>
                     </Table.Root>
                 </Tabs.Content>
@@ -49,11 +73,15 @@ export default function ContactSelect() {
                             </Table.Row>
                         </Table.Header>
                         <Table.Body>
-                            <Table.Row>
-                                <Table.RowHeaderCell><Checkbox className="cursor-pointer"/></Table.RowHeaderCell>
-                                <Table.Cell>Class Assignment</Table.Cell>
-                                <Table.Cell>24</Table.Cell>
-                            </Table.Row>
+                            {
+                                groups.map((group) => (
+                                    <Table.Row>
+                                        <Table.RowHeaderCell><Checkbox className="cursor-pointer"/></Table.RowHeaderCell>
+                                        <Table.Cell>{group.name}</Table.Cell>
+                                        <Table.Cell>{group.contacts.length}</Table.Cell>
+                                    </Table.Row>
+                                ))
+                            }
                         </Table.Body>
                     </Table.Root>
                 </Tabs.Content>

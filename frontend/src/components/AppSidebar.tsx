@@ -2,12 +2,17 @@ import { Flex, IconButton } from "@radix-ui/themes";
 import { MdArrowForwardIos, MdArrowBackIos } from "react-icons/md";
 import { LuLayoutDashboard, LuPencilLine, LuSettings } from "react-icons/lu";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { RiContactsLine } from "react-icons/ri";
 import { SlLogout } from "react-icons/sl";
 
 export default function AppSidebar() {
     const [sidebarOpen, setSidebarOPen] = useState(false)
+    const navigate = useNavigate()
+    const handleLogout = () => {
+        localStorage.clear()
+        navigate('/')
+    }
     return (
         <div className="hidden md:block fixed left-0 top-0 pt-8 bg-white h-full border-r-2 w-fit mt-10  ">
             {/* <p className="font-bold text-xl px-4">Mail <span>Magic</span></p> */}
@@ -38,10 +43,10 @@ export default function AppSidebar() {
                     <LuSettings />
                     { sidebarOpen && <p>Settings</p>}
                 </NavLink>
-                <NavLink to={'/'} className={({isActive}) => `flex gap-2 mt-16 items-center px-4 py-2 ${isActive && "text-purple-700 bg-purple-100"}`}>
+                <Flex className="flex gap-2 mt-16 items-center px-4 py-2 cursor-pointer" onClick={() => handleLogout()}>
                     <SlLogout />
                     { sidebarOpen && <p>Logout</p>}
-                </NavLink>
+                </Flex>
             </Flex>
         </div>
     )

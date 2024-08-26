@@ -1,11 +1,13 @@
 from django.urls import path
-from api.views import SignupView, UserView, LoginView, ContactsView, ContactGroupsView, AddContactGroupItemView, DeleteContactGroupItemView, GetContactGroupItemView
+from api.views import SignupView, UserView, LoginView, ContactsView, ContactGroupsView, AddContactGroupItemView, DeleteContactGroupItemView, GetContactGroupItemView, EmailAccountView
 
 urlpatterns = [
     path('users', UserView.as_view()),
     path('users/<int:user_id>', UserView.as_view()),
     path('signup', SignupView.as_view()),
     path('login', LoginView.as_view()),
+    path('emailaccounts', EmailAccountView.as_view()),
+    path('emailaccounts/<int:emailaccount_id>', EmailAccountView.as_view()),
     path('contacts', ContactsView.as_view()),
     path('contacts/<int:contact_id>', ContactsView.as_view()),
     path('contactgroups', ContactGroupsView.as_view()),

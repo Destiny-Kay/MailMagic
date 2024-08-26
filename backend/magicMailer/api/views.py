@@ -3,8 +3,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from api.serializers import UserSerializer, ContactSerializer, ContactGroupSerializer, GroupContactItemsSerializer
-from api.models import CustomUser, Contact, ContactGroup
+from api.serializers import UserSerializer, ContactSerializer, ContactGroupSerializer, GroupContactItemsSerializer, EmailAccountSerializer
+from api.models import CustomUser, Contact, ContactGroup, EmailAccount
 from django.shortcuts import get_object_or_404
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.authtoken.models import Token
@@ -220,3 +220,50 @@ class DeleteContactGroupItemView(APIView):
         contact = get_object_or_404(Contact, id=contact_id)
         contact_group.contacts.remove(contact)
         return Response({'message': 'contacts removed successfully'}, status=status.HTTP_200_OK)
+
+
+class EmailAccountView(APIView):
+    '''Accounts for email addresses to be used to send emails'''
+    permission_classes = [IsAuthenticated]
+    def get(self, request, emailaccount_id=None):
+        email_owner = request.user
+        if emailaccount_id:
+            email_account = EmailAccount.objects.get(id=emailaccount_id)
+            serializer = EmailAccountSerializer(email_account)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        email_accounts = EmailAccount.objects.filter(owner=request.user.id)
+        serializer = EmailAccountSerializer(email_accounts, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def post(self, request):
+        '''post request handler'''
+        if not request.data:
+            return Response({'error': 'bad request'}, status=status.HTTP_400_BAD_REQUEST)
+        payload = {
+            "name": request.data['name'],
+            "owner": request.user.id,
+            "email_address": request.data['email'],
+            "password": request.data['password']
+        }
+        serializer = EmailAccountSerializer(data=payload)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def put(self, request, emailaccount_id=None):
+        '''make changes to an email account'''
+        if not emailaccount_id or not request.data:
+            return Response({'error': 'bad request'}, status=status.HTTP_400_BAD_REQUEST)
+        email_account = get_object_or_404(EmailAccount, id=emailaccount_id)
+        serializer = EmailAccountSerializer(email_account, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def delete(self, request, emailaccount_id=None):
+        '''Deletes an email account'''
+        if not emailaccount_id:
+            return Response({'error': 'bad request'}, status=status.HTTP_400_BAD_REQUEST)
+        email_account = get_object_or_404(EmailAccount, id=emailaccount_id)
+        email_account.delete()
+        return Response({}, status=status.HTTP_204_NO_CONTENT)

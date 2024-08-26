@@ -2,7 +2,7 @@ import { Avatar, Container, IconButton, Table, Tabs, Flex, TextArea } from "@rad
 import AppLayout from "../../layouts/AppLayout";
 import * as Dialog from "@radix-ui/react-dialog"
 import { FaPlus } from "react-icons/fa";
-import React, { ButtonHTMLAttributes, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { api } from "../../lib/requestHandler";
 import { emailValid } from "../../utils/emailChecker";
 

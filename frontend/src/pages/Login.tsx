@@ -60,6 +60,7 @@ export default function Login() {
                         <label className="block">Password</label>
                         <input
                             name="password"
+                            type="password"
                             onChange={(event) => handleLoginFormChange(event)}
                             className="w-full border-2 border-purple-400 h-[40px] focus:outline-none px-2 rounded-md"></input>
                     </div>
