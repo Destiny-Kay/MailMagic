@@ -39,12 +39,18 @@ class SignupView(APIView):
 
 
 class UserView(APIView):
-    '''Get request handler for the user model'''
+    '''Request handler for the user model'''
     permission_classes = [AllowAny]
     def get(self, request):
         users = CustomUser.objects.all()
         serializer = UserSerializer(users, many=True, context = {'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def delete(self, request, user_id):
+        '''deletes a user'''
+        user = get_object_or_404(CustomUser, id=user_id)
+        user.delete()
+        return Response({}, status=status.HTTP_204_NO_CONTENT)
 
 
 class LoginView(APIView):

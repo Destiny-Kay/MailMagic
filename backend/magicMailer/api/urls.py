@@ -3,6 +3,7 @@ from api.views import SignupView, UserView, LoginView, ContactsView, ContactGrou
 
 urlpatterns = [
     path('users', UserView.as_view()),
+    path('users/<int:user_id>', UserView.as_view()),
     path('signup', SignupView.as_view()),
     path('login', LoginView.as_view()),
     path('contacts', ContactsView.as_view()),
