@@ -1,8 +1,11 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import AuthLayout from "../layouts/AuthLayout";
 import { Flex, Button, Checkbox } from "@radix-ui/themes";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import "/signup-image.jpg"
+import { emailValid } from "../utils/emailChecker";
+import { api } from "../lib/requestHandler";
 
 type signupForm = {
     firstName: string,
@@ -14,6 +17,7 @@ type signupForm = {
 type passwordType = "text" | "password"
 
 export default function Signup() {
+    const navigate = useNavigate()
     const [passwordType, setPasswordType] = useState<passwordType>("password")
     const [signupForm, setSignupForm] = useState<signupForm>(
         {
@@ -24,9 +28,30 @@ export default function Signup() {
             repeatPass: ''
         }
     )
+    const [agreedToTerms, setAgreedToterms] = useState<boolean>(false)
     const handleSignupFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target
         setSignupForm({...signupForm, [name]: value})
+    }
+    const [emailIsValid, setEmailIsValid] = useState<boolean>(true)
+    const handleFormSubmit = (event: React.FormEvent<SubmitEvent> | React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
+        const payload = {
+            "first_name": signupForm.firstName,
+            "last_name": signupForm.lastName,
+            "email":signupForm.email,
+            "password": signupForm.password
+        }
+        api.post('/app/signup', payload)
+        .then((response) => {
+            if (response.status === 201) {
+                navigate('/auth/login')
+            }
+        }).catch((error) => {
+            if (error.response?.status === 400) {
+                alert('DEtails you provided are not valid or have an existing account')
+            }
+        })
     }
 
     return (
@@ -55,9 +80,16 @@ export default function Signup() {
                         <div>
                             <label className="block">Email</label>
                             <input
-                                onChange={(event) => handleSignupFormChange(event)}
+                                onChange={(event) => {
+                                    setEmailIsValid(emailValid(event.target.value))
+                                    handleSignupFormChange(event)}}
                                 name="email"
-                                className="w-full border-2 border-purple-400 focus:outline-none rounded-md h-[40px] px-2" placeholder="johndoe@email.com"></input>
+                                className="w-full border-2 border-purple-400 focus:outline-none rounded-md h-[40px] px-2" placeholder="johndoe@email.com">
+                            </input>
+                            {
+                                !emailIsValid &&
+                                <p className="text-red-500 text-sm italic">Enter a valid email address</p>
+                            }
                         </div>
                         <div>
                             <label className="block">Password</label>
@@ -79,17 +111,29 @@ export default function Signup() {
                             <input
                                 onChange={(event) => handleSignupFormChange(event)}
                                 name="repeatPass"
-                                type="password" className="w-full border-2 border-purple-400 focus:outline-none rounded-md h-[40px] px-2"></input>
+                                type="password" className="w-full border-2 border-purple-400 focus:outline-none rounded-md h-[40px] px-2">
+                            </input>
+                            {
+                                signupForm.password != signupForm.repeatPass &&
+                                <p className="text-red-500 text-sm italic">**passwords do not match</p>
+                            }
                         </div>
                         <Flex className="mt-6 gap-2 items-center">
-                            <Checkbox />
+                            <Checkbox onClick={() => setAgreedToterms(prev => !prev)}/>
                             <p className="text-sm italic font-bold">I agree to all terms and conditions and the privacy policy.</p>
                         </Flex>
                         <div>
-                            <Button className="w-full mt-6 py-6 cursor-pointer">Create account</Button>
+                            {
+                                agreedToTerms ?
+                                <Button className="w-full mt-6 py-6 cursor-pointer" onClick={(event) => handleFormSubmit(event)}>Create account</Button>
+                                :
+                                <Button className="w-full mt-6 py-6 cursor-pointer" disabled>Create account</Button>
+                            }
                         </div>
                     </form>
-                    <div className="hidden lg:block">IMage here</div>
+                    <div className="hidden lg:block">
+                        <img className="" src="signup-image.jpg"></img>
+                    </div>
                 </div>
             </div>
         </AuthLayout>

@@ -1,6 +1,9 @@
 import { Flex, Box, Button, Grid } from "@radix-ui/themes";
 import WebLayout from "../layouts/WebLayout";
 import "/landing-image.png"
+import "/create-account.png"
+import "/create-contacts.png"
+import "/send-emails.png"
 import { IoIosTimer } from "react-icons/io";
 import { MdOutlineSpeed } from "react-icons/md";
 import { RiContactsLine } from "react-icons/ri";
@@ -42,13 +45,15 @@ export default function Landing() {
                 </div>
                 <div className="mt-10 text-center">
                     <p className="text-xl md:text-4xl font-extrabold">Emailing has never been this easy!!</p>
-                    <Grid className="grid-cols-1 md:grid-cols-2 mt-10 items-center gap-8">
+                    <Grid className="grid-cols-1 md:grid-cols-2 mt-10 items-center m-auto gap-8">
                         <p className="text-3xl font-bold text-purple-700">Create an account</p>
-                        <p className="h-[400px] border-2 border-blue-400">Image here</p>
+                        <img className="h-[400px]" src="create-account.png"></img>
                         <p className="text-3xl font-bold text-purple-700">Create your contacts</p>
-                        <p className="md:row-start-2 h-[400px] border-2 border-blue-400">IMage here</p>
+                        <div className="md:row-start-2 flex justify-center h-[400px]">
+                            <img src="/create-contacts.png"></img>
+                        </div>
                         <p className="text-3xl font-bold text-purple-700">Send Emails to your contacts</p>
-                        <p className="h-[400px] border-2 border-blue-400">Send image</p>
+                        <img className="h-[400px]" src="send-emails.png"></img>
                     </Grid>
                 </div>
                 <p className="text-xl md:text-4xl text-center mt-10 font-extrabold">Let's get that message into their inbox.</p>

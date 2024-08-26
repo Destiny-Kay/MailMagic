@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import Landing from "./pages/Landing";
 import About from "./pages/About";
 import Login from "./pages/Login";
@@ -24,6 +24,10 @@ export const router = createBrowserRouter([
     {
         path: '/auth/signup',
         element: <Signup />
+    },
+    {
+        path: '/app',
+        element: <Navigate to={'/app/dashboard'}/>
     },
     {
         path: '/app/dashboard',
