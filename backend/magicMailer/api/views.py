@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from api.serializers import UserSerializer, ContactSerializer, ContactGroupSerializer
+from api.serializers import UserSerializer, ContactSerializer, ContactGroupSerializer, GroupContactItemsSerializer
 from api.models import CustomUser, Contact, ContactGroup
 from django.shortcuts import get_object_or_404
 from rest_framework.exceptions import AuthenticationFailed
@@ -111,7 +111,7 @@ class ContactsView(APIView):
             serializer = UserSerializer(user)
             return Response(serializer.data, status=status.HTTP_200_OK)
         user = request.user
-        contacts = Contact.objects.filter(created_by=user.id).order_by(id)
+        contacts = Contact.objects.filter(created_by=user.id).order_by('name')
         results_page = pagintaion_class.paginate_queryset(contacts, request)
         serializer = ContactSerializer(results_page, many=True)
         payload = {
@@ -139,7 +139,7 @@ class ContactGroupsView(APIView):
             contact_group = get_object_or_404(ContactGroup, id=contact_group_id)
             serializer = ContactGroupSerializer(contact_group)
             return Response(serializer.data, status=status.HTTP_200_OK)
-        contact_groups = ContactGroup.objects.filter(creator=request.user.id).order_by(id)
+        contact_groups = ContactGroup.objects.filter(creator=request.user.id).order_by('name')
         results = pagination_class.paginate_queryset(contact_groups, request)
         serializer = ContactGroupSerializer(results, many=True)
         payload = {
@@ -186,6 +186,16 @@ class ContactGroupsView(APIView):
         contact_group = get_object_or_404(ContactGroup, id=contact_group_id)
         contact_group.delete()
         return Response({}, status=status.HTTP_204_NO_CONTENT)
+
+class GetContactGroupItemView(APIView):
+    '''Returns the contacts in a particular group'''
+    permission_classes = [IsAuthenticated]
+    def get(self, request, contact_group_id=None):
+        if not contact_group_id:
+            return Response({'error': 'bad request'})
+        contact_group = get_object_or_404(ContactGroup, id=contact_group_id)
+        serializer = GroupContactItemsSerializer(contact_group)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class AddContactGroupItemView(APIView):
     '''Manages individual contacts in a group '''

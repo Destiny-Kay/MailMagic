@@ -40,3 +40,11 @@ class ContactGroupSerializer(ModelSerializer):
     class Meta:
         model = ContactGroup
         fields = "__all__"
+
+class GroupContactItemsSerializer(ModelSerializer):
+    '''serializer class for the  contacts in a group'''
+    contacts = ContactSerializer(many=True)
+
+    class Meta:
+        model = ContactGroup
+        fields = ["contacts"]
