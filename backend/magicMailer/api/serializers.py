@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer, CharField
-from api.models import CustomUser, Contact, ContactGroup
+from api.models import CustomUser, Contact, ContactGroup, EmailAccount
 
 
 class UserSerializer(ModelSerializer):
@@ -48,3 +48,10 @@ class GroupContactItemsSerializer(ModelSerializer):
     class Meta:
         model = ContactGroup
         fields = ["contacts"]
+
+
+class EmailAccountSerializer(ModelSerializer):
+    '''serializer object for the email account model'''
+    class Meta:
+        model = EmailAccount
+        fields = '__all__'

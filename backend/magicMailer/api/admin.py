@@ -18,3 +18,8 @@ class CusContactAdmintomUserAdmin(admin.ModelAdmin):
 @admin.register(models.EmailContent)
 class CusContactAdmintomUserAdmin(admin.ModelAdmin):
     list_display = [field.name for field in models.EmailContent._meta.fields]
+
+
+@admin.register(models.EmailAccount)
+class EmailAccountAdmintomUserAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in models.EmailAccount._meta.fields]

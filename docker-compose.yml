@@ -1,0 +1,56 @@
+services:
+  backend:
+    image: mailMagic-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 8000: 8000
+    volumes:
+      - ${PWD}/backend:/app
+    depends_on:
+      db:
+        condition: service_healthy
+      networks:
+        - mailMagic-net
+      restart: always
+  db:
+    image: postgres:13.1-alpine
+    volumes:
+      -mailMagic_db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=magic_mailer_user
+      - PGUSER=tiba_app_user
+      - POSTGRES_PASSWORD=password
+      - POSTGRESS_DB=mail_magic_db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h db"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+    networks:
+      - mailMagic-net
+    restart: always
+  
+  frontend:
+    image: mailMagic-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 5173:5173
+    volumes:
+      -${PWD}/frontend:/app
+    depends_on:
+      - backend
+    networks:
+      - mailMagic-net
+    restart: always
+
+volumes:
+  mailMagic_db:
+
+networks:
+  tiba_net:
+    driver: bridge
