@@ -10,6 +10,7 @@ from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.authtoken.models import Token
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.pagination import PageNumberPagination
+from api.tasks import mail_send_emails
 
 
 class Pagination(PageNumberPagination):
@@ -267,3 +268,19 @@ class EmailAccountView(APIView):
         email_account = get_object_or_404(EmailAccount, id=emailaccount_id)
         email_account.delete()
         return Response({}, status=status.HTTP_204_NO_CONTENT)
+
+class SendEMailsView(APIView):
+    '''sends mass emails to selected users'''
+    permission_classes = [IsAuthenticated]
+    def post(self, request):
+        '''HAndles sending of emails'''
+        if not request.data:
+            return Response({'error': 'bad request'}, status=status.HTTP_400_BAD_REQUEST)
+        user = request.user
+        sender_email = request.data['sender_email']
+        recipients = request.data['recipients']
+        salutation = request.data['recipients']
+        body = request.data['message']
+        subject = request.data['subject']
+        mail_send_emails.delay(user, sender_email, recipients, salutation, body, subject)
+        return Response({"success": "email sending started"}, status=status.HTTP_200_OK)

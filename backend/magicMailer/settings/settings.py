@@ -52,6 +52,14 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(hours=4),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1)
 }
+
+# CELERY configuration opions
+# CELERY_BROKER_URL = 'amqp://guest:guest@localhost'
+CELERY_TIMEZONE = "Africa/Nairobi"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+
+
 ROOT_URLCONF = 'settings.urls'
 
 TEMPLATES = [

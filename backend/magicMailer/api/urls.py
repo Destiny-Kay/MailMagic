@@ -1,5 +1,5 @@
 from django.urls import path
-from api.views import SignupView, UserView, LoginView, ContactsView, ContactGroupsView, AddContactGroupItemView, DeleteContactGroupItemView, GetContactGroupItemView, EmailAccountView
+from api.views import SignupView, UserView, LoginView, ContactsView, ContactGroupsView, AddContactGroupItemView, DeleteContactGroupItemView, GetContactGroupItemView, EmailAccountView, SendEMailsView
 
 urlpatterns = [
     path('users', UserView.as_view()),
@@ -15,4 +15,5 @@ urlpatterns = [
     path('contactgroups/<int:contact_group_id>/add', AddContactGroupItemView.as_view()),
     path('contactgroups/<int:contact_group_id>/contacts', GetContactGroupItemView.as_view()),
     path('contactgroups/<int:contact_group_id>/delete/<int:contact_id>', DeleteContactGroupItemView.as_view()),
+    path('mail/send', SendEMailsView.as_view())
 ]
