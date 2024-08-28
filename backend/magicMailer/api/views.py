@@ -276,7 +276,7 @@ class SendEMailsView(APIView):
         '''HAndles sending of emails'''
         if not request.data:
             return Response({'error': 'bad request'}, status=status.HTTP_400_BAD_REQUEST)
-        user = request.user
+        user = request.user.id
         sender_email = request.data['sender_email']
         recipients = request.data['recipients']
         salutation = request.data['recipients']
